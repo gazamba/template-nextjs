@@ -1,11 +1,11 @@
 import { NextRequest, NextResponse } from "next/server";
 import { eq } from "drizzle-orm";
 import { headers } from "next/headers";
-import { auth } from "../../../../lib/auth";
+import { auth } from "../../../../lib/auth/auth";
 import { env } from "../../../../lib/env/server";
-import { stripe } from "../../../../lib/stripe";
+import { stripe } from "../../../../lib/billing/stripe";
 import { db } from "../../../../lib/db";
-import { customer } from "../../../../lib/stripe-schema";
+import { customer } from "../../../../lib/billing/stripe-schema";
 
 export async function POST(req: NextRequest) {
   const session = await auth.api.getSession({

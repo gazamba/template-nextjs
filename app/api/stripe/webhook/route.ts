@@ -1,9 +1,9 @@
 import { NextRequest, NextResponse } from "next/server";
 import { eq } from "drizzle-orm";
 import { env } from "../../../../lib/env/server";
-import { stripe } from "../../../../lib/stripe";
+import { stripe } from "../../../../lib/billing/stripe";
 import { db } from "../../../../lib/db";
-import { customer, subscription } from "../../../../lib/stripe-schema";
+import { customer, subscription } from "../../../../lib/billing/stripe-schema";
 import type Stripe from "stripe";
 
 export async function POST(req: NextRequest) {
