@@ -7,7 +7,7 @@ A production-ready Next.js 16 SaaS starter template with authentication, billing
 | Category | Technology |
 |----------|-----------|
 | Framework | [Next.js 16](https://nextjs.org) (App Router), React 19, TypeScript |
-| Styling | [Tailwind CSS 4](https://tailwindcss.com) |
+| Styling | [Tailwind CSS 4](https://tailwindcss.com) + [shadcn/ui](https://ui.shadcn.com) |
 | Database | [Neon](https://neon.tech) PostgreSQL + [Drizzle ORM](https://orm.drizzle.team) |
 | Auth | [better-auth](https://www.better-auth.com) (email/password) |
 | Billing | [Stripe](https://stripe.com) (subscriptions, checkout, webhooks) |
@@ -55,6 +55,12 @@ Open [http://localhost:3000](http://localhost:3000).
 
 ```
 app/
+  (auth)/                   # Auth pages (centered layout)
+    login/                  # Login page
+    signup/                 # Signup page
+    forgot-password/        # Forgot password page
+    reset-password/         # Reset password page
+    _components/            # Auth-specific components
   api/
     auth/[...all]/          # Auth API (better-auth)
     stripe/checkout/        # Stripe checkout session
@@ -63,7 +69,7 @@ app/
   layout.tsx                # Root layout
 
 components/
-  ui/                       # Shared UI components
+  ui/                       # Shared UI components (shadcn/ui)
 
 lib/
   analytics/                # PostHog server client
@@ -71,11 +77,14 @@ lib/
   billing/                  # Stripe client, subscription schema
   cache/                    # Redis client, rate limiter
   db/                       # Database connection (Drizzle + Neon)
+  email/                    # Resend email client
   env/                      # Type-safe env validation (server + client)
   vector/                   # Pinecone vector DB client
 
 scripts/
   generate-env-example.ts   # Auto-generate .env.example from schema
+
+proxy.ts                    # Route protection (auth redirects)
 ```
 
 ## Scripts
@@ -99,6 +108,26 @@ All env vars are validated at runtime using Zod with lazy evaluation. The schema
 - **Client-side:** `import { clientEnv } from "@/lib/env/client"`
 
 Never use `process.env` directly. After adding a new variable, update the schema in `lib/env/server.ts` and run `pnpm env:example` to regenerate the example file.
+
+## Auth
+
+Authentication is handled by [better-auth](https://www.better-auth.com) with email/password. The template includes:
+
+- **Login, signup, forgot-password, and reset-password pages** in `app/(auth)/`
+- **Route protection** via `proxy.ts` — unauthenticated users are redirected to `/login`
+- **Password reset emails** via [Resend](https://resend.com)
+
+Protected routes are configured in the `protectedPaths` array in `proxy.ts`. By default, `/dashboard` is protected.
+
+## Adding UI Components
+
+This template uses [shadcn/ui](https://ui.shadcn.com). To add new components:
+
+```bash
+pnpm dlx shadcn@latest add <component-name>
+```
+
+Components are placed in `components/ui/`.
 
 ## License
 
