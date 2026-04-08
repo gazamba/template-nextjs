@@ -1,6 +1,10 @@
 import { NextRequest, NextResponse } from "next/server";
 
-const protectedPaths = ["/dashboard"];
+// Routes inside app/(protected)/ are guarded server-side by the layout.
+// This proxy adds an optimistic redirect layer so unauthenticated users
+// get bounced to /login before the page even renders, and authenticated
+// users on auth pages get redirected to /dashboard.
+const protectedPaths = ["/dashboard", "/settings", "/profile"];
 const authPaths = ["/login", "/signup", "/forgot-password", "/reset-password"];
 
 export async function proxy(request: NextRequest) {
