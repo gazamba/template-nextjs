@@ -1,7 +1,7 @@
 import { writeFileSync } from "fs";
 import { resolve, dirname } from "path";
 import { fileURLToPath } from "url";
-import { serverEnvSchema } from "../lib/env/server";
+import { serverEnvSchema } from "@/lib/env/server";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 

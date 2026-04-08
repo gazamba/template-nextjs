@@ -1,5 +1,5 @@
 import { PostHog } from "posthog-node";
-import { env } from "../env/server";
+import { env } from "@/lib/env/server";
 
 export const posthog = new PostHog(env.NEXT_PUBLIC_POSTHOG_KEY, {
   host: env.NEXT_PUBLIC_POSTHOG_HOST,

@@ -1,8 +1,8 @@
 import { neon } from "@neondatabase/serverless";
 import { drizzle } from "drizzle-orm/neon-http";
-import * as authSchema from "../auth/auth-schema";
-import { env } from "../env/server";
-import * as stripeSchema from "../billing/stripe-schema";
+import * as authSchema from "@/lib/auth/auth-schema";
+import { env } from "@/lib/env/server";
+import * as stripeSchema from "@/lib/billing/stripe-schema";
 
 const schema = { ...authSchema, ...stripeSchema };
 
