@@ -16,6 +16,8 @@ A production-ready Next.js 16 SaaS starter template with authentication, billing
 | Cache | [Upstash](https://upstash.com) Redis + rate limiting |
 | Vector DB | [Pinecone](https://pinecone.io) |
 | Email | [Resend](https://resend.com) |
+| Background Jobs | [Inngest](https://inngest.com) (async functions, retries, scheduling) |
+| Logging | [Pino](https://getpino.io) (structured JSON logs) |
 | Env Validation | [Zod](https://zod.dev) (type-safe, lazy validation) |
 | Build | [Turborepo](https://turbo.build) |
 
@@ -79,6 +81,8 @@ lib/
   db/                       # Database connection (Drizzle + Neon)
   email/                    # Resend email client
   env/                      # Type-safe env validation (server + client)
+  jobs/                     # Inngest client + background functions
+  logging/                  # Pino structured logger
   vector/                   # Pinecone vector DB client
 
 scripts/

@@ -16,6 +16,8 @@ Next.js 16 SaaS starter template with authentication, billing, analytics, error 
 - **Cache/Rate limiting:** Upstash Redis
 - **Vector DB:** Pinecone
 - **Email:** Resend
+- **Background jobs:** Inngest
+- **Logging:** Pino (JSON in prod, pretty-print in dev)
 - **Env validation:** Zod (lazy proxy, server/client split)
 - **Build:** Turborepo
 
@@ -48,6 +50,8 @@ lib/
   db/                       # Drizzle ORM + Neon connection
   email/                    # Resend client
   env/                      # Zod env validation (server.ts, client.ts)
+  jobs/                     # Inngest client + background functions
+  logging/                  # Pino logger
   vector/                   # Pinecone client
 
 scripts/
