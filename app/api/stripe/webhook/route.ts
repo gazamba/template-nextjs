@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { eq } from "drizzle-orm";
+import { env } from "../../../../lib/env/server";
 import { stripe } from "../../../../lib/stripe";
 import { db } from "../../../../lib/db";
 import { customer, subscription } from "../../../../lib/stripe-schema";
@@ -18,7 +19,7 @@ export async function POST(req: NextRequest) {
     event = stripe.webhooks.constructEvent(
       body,
       signature,
-      process.env.STRIPE_WEBHOOK_SECRET!,
+      env.STRIPE_WEBHOOK_SECRET,
     );
   } catch {
     return NextResponse.json({ error: "Invalid signature" }, { status: 400 });

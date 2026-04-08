@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { eq } from "drizzle-orm";
 import { headers } from "next/headers";
 import { auth } from "../../../../lib/auth";
+import { env } from "../../../../lib/env/server";
 import { stripe } from "../../../../lib/stripe";
 import { db } from "../../../../lib/db";
 import { customer } from "../../../../lib/stripe-schema";
@@ -49,8 +50,8 @@ export async function POST(req: NextRequest) {
     customer: existing.stripeCustomerId,
     mode: "subscription",
     line_items: [{ price: priceId, quantity: 1 }],
-    success_url: `${process.env.BETTER_AUTH_URL}/dashboard?checkout=success`,
-    cancel_url: `${process.env.BETTER_AUTH_URL}/pricing?checkout=canceled`,
+    success_url: `${env.BETTER_AUTH_URL}/dashboard?checkout=success`,
+    cancel_url: `${env.BETTER_AUTH_URL}/pricing?checkout=canceled`,
   });
 
   return NextResponse.json({ url: checkoutSession.url });

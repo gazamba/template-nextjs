@@ -1,5 +1,6 @@
 import { Pinecone } from "@pinecone-database/pinecone";
+import { env } from "./env/server";
 
 export const pinecone = new Pinecone({
-  apiKey: process.env.PINECONE_API_KEY!,
+  apiKey: env.PINECONE_API_KEY,
 });
