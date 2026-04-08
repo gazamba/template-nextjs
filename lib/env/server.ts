@@ -8,7 +8,7 @@ export const serverEnvSchema = z.object({
   BETTER_AUTH_SECRET: z
     .string()
     .min(32)
-    .describe("Secret key for better-auth session signing (min 32 chars)"),
+    .describe("Secret key for better-auth session signing (min 32 chars). Generate with: openssl rand -base64 32"),
   BETTER_AUTH_URL: z
     .string()
     .url()
