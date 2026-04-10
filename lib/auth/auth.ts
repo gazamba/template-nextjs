@@ -9,6 +9,9 @@ export const auth = betterAuth({
   emailAndPassword: {
     enabled: true,
     sendResetPassword: async ({ user, url }) => {
+      if (!resend) {
+        throw new Error("Resend is not configured. Set RESEND_API_KEY to enable password reset emails.");
+      }
       await resend.emails.send({
         from: "noreply@yourdomain.com",
         to: user.email,

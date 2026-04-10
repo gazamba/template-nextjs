@@ -61,10 +61,11 @@ function generate() {
     for (const key of vars) {
       const fieldSchema = shape[key as keyof typeof shape];
       const desc = fieldSchema.description;
-      const hasDefault = key in defaults;
+      const isOptional =
+        key in defaults || fieldSchema.isOptional();
 
       if (desc) {
-        lines.push(`# ${desc}${hasDefault ? " (optional)" : ""}`);
+        lines.push(`# ${desc}${isOptional ? " (optional)" : ""}`);
       }
       lines.push(`${key}=${defaults[key] ?? ""}`);
     }

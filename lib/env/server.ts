@@ -1,6 +1,7 @@
 import { z } from "zod";
 
 export const serverEnvSchema = z.object({
+  // ── Required ───────────────────────────────────────────────
   DATABASE_URL: z
     .string()
     .url()
@@ -8,38 +9,49 @@ export const serverEnvSchema = z.object({
   BETTER_AUTH_SECRET: z
     .string()
     .min(32)
-    .describe("Secret key for better-auth session signing (min 32 chars). Generate with: openssl rand -base64 32"),
+    .describe(
+      "Secret key for better-auth session signing (min 32 chars). Generate with: openssl rand -base64 32",
+    ),
   BETTER_AUTH_URL: z
     .string()
     .url()
     .describe("Public URL of the app (e.g. http://localhost:3000)"),
+
+  // ── Optional ───────────────────────────────────────────────
   STRIPE_SECRET_KEY: z
     .string()
     .startsWith("sk_")
+    .optional()
     .describe("Stripe secret key (starts with sk_)"),
   STRIPE_WEBHOOK_SECRET: z
     .string()
     .startsWith("whsec_")
+    .optional()
     .describe("Stripe webhook signing secret (starts with whsec_)"),
   UPSTASH_REDIS_REST_URL: z
     .string()
     .url()
+    .optional()
     .describe("Upstash Redis REST URL"),
   UPSTASH_REDIS_REST_TOKEN: z
     .string()
     .min(1)
+    .optional()
     .describe("Upstash Redis REST token"),
   PINECONE_API_KEY: z
     .string()
     .min(1)
+    .optional()
     .describe("Pinecone API key"),
   RESEND_API_KEY: z
     .string()
     .min(1)
+    .optional()
     .describe("Resend API key for transactional emails"),
   NEXT_PUBLIC_POSTHOG_KEY: z
     .string()
     .min(1)
+    .optional()
     .describe("PostHog project API key (starts with phc_)"),
   NEXT_PUBLIC_POSTHOG_HOST: z
     .string()
@@ -49,6 +61,7 @@ export const serverEnvSchema = z.object({
   NEXT_PUBLIC_SENTRY_DSN: z
     .string()
     .url()
+    .optional()
     .describe("Sentry DSN for error tracking (https://...@sentry.io/...)"),
 });
 

@@ -4,6 +4,7 @@ export const clientEnvSchema = z.object({
   NEXT_PUBLIC_POSTHOG_KEY: z
     .string()
     .min(1)
+    .optional()
     .describe("PostHog project API key (starts with phc_)"),
   NEXT_PUBLIC_POSTHOG_HOST: z
     .string()
@@ -13,6 +14,7 @@ export const clientEnvSchema = z.object({
   NEXT_PUBLIC_SENTRY_DSN: z
     .string()
     .url()
+    .optional()
     .describe("Sentry DSN for error tracking (https://...@sentry.io/...)"),
 });
 

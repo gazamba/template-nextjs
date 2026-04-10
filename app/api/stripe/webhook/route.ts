@@ -7,6 +7,13 @@ import { customer, subscription } from "@/lib/billing/stripe-schema";
 import type Stripe from "stripe";
 
 export async function POST(req: NextRequest) {
+  if (!stripe || !env.STRIPE_WEBHOOK_SECRET) {
+    return NextResponse.json(
+      { error: "Stripe is not configured" },
+      { status: 503 },
+    );
+  }
+
   const body = await req.text();
   const signature = req.headers.get("stripe-signature");
 

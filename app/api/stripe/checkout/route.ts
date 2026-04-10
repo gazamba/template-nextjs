@@ -8,6 +8,13 @@ import { db } from "@/lib/db";
 import { customer } from "@/lib/billing/stripe-schema";
 
 export async function POST(req: NextRequest) {
+  if (!stripe) {
+    return NextResponse.json(
+      { error: "Stripe is not configured" },
+      { status: 503 },
+    );
+  }
+
   const session = await auth.api.getSession({
     headers: await headers(),
   });
